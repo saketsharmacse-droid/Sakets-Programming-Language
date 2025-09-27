@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentation - Saket's Language</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fsaketsla7364back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background font-inter">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-subtle sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M12 14h8v2h-8v-2zm0 4h6v2h-6v-2z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-bold text-text-primary">Saket's Language</h1>
+                        <p class="text-xs text-text-secondary">Real code, unreal syntax</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-fast">Home</a>
+                        <a href="interactive_ide.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-fast">IDE</a>
+                        <a href="documentation.html" class="text-primary font-medium px-3 py-2 rounded-md text-sm bg-primary-50">Docs</a>
+                        <a href="javascript:void(0)" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-fast">Community</a>
+                        <a href="javascript:void(0)" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-fast">Tutorials</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="text-text-secondary hover:text-primary p-2" id="mobile-menu-btn">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Documentation Layout -->
+    <div class="flex min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside class="w-80 bg-surface shadow-subtle border-r border-border hidden lg:block sticky top-16 h-screen overflow-y-auto">
+            <div class="p-6">
+                <!-- Search Box -->
+                <div class="mb-6">
+                    <div class="relative">
+                        <input type="text" placeholder="Search documentation..." class="input-field w-full pl-10 pr-4" id="search-input" />
+                        <svg class="w-5 h-5 text-text-secondary absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Navigation Menu -->
+                <nav class="space-y-2">
+                    <!-- Getting Started -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-text-primary uppercase tracking-wider mb-2">Getting Started</h3>
+                        <ul class="space-y-1">
+                            <li><a href="#introduction" class="nav-link active">Introduction</a></li>
+                            <li><a href="#installation" class="nav-link">Installation</a></li>
+                            <li><a href="#first-program" class="nav-link">Your First Program</a></li>
+                            <li><a href="#basic-concepts" class="nav-link">Basic Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Language Syntax -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-text-primary uppercase tracking-wider mb-2">Language Syntax</h3>
+                        <ul class="space-y-1">
+                            <li><a href="#variables" class="nav-link">Variables & Data Types</a></li>
+                            <li><a href="#operators" class="nav-link">Operators</a></li>
+                            <li><a href="#conditionals" class="nav-link">Conditionals</a></li>
+                            <li><a href="#loops" class="nav-link">Loops</a></li>
+                            <li><a href="#functions" class="nav-link">Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Mathematical Operations -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-text-primary uppercase tracking-wider mb-2">Mathematical Operations</h3>
+                        <ul class="space-y-1">
+                            <li><a href="#basic-math" class="nav-link">Basic Arithmetic</a></li>
+                            <li><a href="#advanced-math" class="nav-link">Advanced Functions</a></li>
+                            <li><a href="#statistics" class="nav-link">Statistics</a></li>
+                            <li><a href="#geometry" class="nav-link">Geometry</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Advanced Topics -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-text-primary uppercase tracking-wider mb-2">Advanced Topics</h3>
+                        <ul class="space-y-1">
+                            <li><a href="#error-handling" class="nav-link">Error Handling</a></li>
+                            <li><a href="#performance" class="nav-link">Performance Tips</a></li>
+                            <li><a href="#best-practices" class="nav-link">Best Practices</a></li>
+                            <li><a href="#migration" class="nav-link">Migration Guide</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Community -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-text-primary uppercase tracking-wider mb-2">Community</h3>
+                        <ul class="space-y-1">
+                            <li><a href="#examples" class="nav-link">Community Examples</a></li>
+                            <li><a href="#contributing" class="nav-link">Contributing</a></li>
+                            <li><a href="#changelog" class="nav-link">Changelog</a></li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- Progress Tracker -->
+                <div class="mt-8 p-4 bg-primary-50 rounded-lg">
+                    <h4 class="text-sm font-semibold text-primary mb-2">Learning Progress</h4>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-text-secondary">Completed</span>
+                        <span class="font-medium text-primary">3/15</span>
+                    </div>
+                    <div class="w-full bg-primary-100 rounded-full h-2 mt-2">
+                        <div class="bg-primary h-2 rounded-full" style="width: 20%"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 max-w-none">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Introduction Section -->
+                <section id="introduction" class="mb-16">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h1 class="text-4xl font-bold text-text-primary mb-4">Documentation</h1>
+                            <p class="text-xl text-text-secondary">Learn Saket's Language through humor, examples, and hands-on practice</p>
+                        </div>
+                        <div class="hidden md:block">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Documentation illustration" class="w-32 h-32 object-cover rounded-xl" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                    </div>
+
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-lg text-text-secondary leading-relaxed mb-6">
+                            Welcome to Saket's Language documentation! This isn't your typical dry, boring programming manual. 
+                            We believe learning should be fun, so we've packed this guide with humor, practical examples, 
+                            and real-world applications that'll make you actually <em>want</em> to read documentation.
+                        </p>
+
+                        <div class="grid md:grid-cols-3 gap-6 my-8">
+                            <div class="card text-center">
+                                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-2">Comprehensive Guide</h3>
+                                <p class="text-text-secondary text-sm">From basic syntax to advanced mathematical operations</p>
+                            </div>
+                            <div class="card text-center">
+                                <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h1m4 0h1m6-10V7a3 3 0 00-3-3H6a3 3 0 00-3 3v10a3 3 0 003 3h12a3 3 0 003-3v-1"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-2">Interactive Examples</h3>
+                                <p class="text-text-secondary text-sm">Try every code example directly in your browser</p>
+                            </div>
+                            <div class="card text-center">
+                                <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-2">Community Driven</h3>
+                                <p class="text-text-secondary text-sm">Examples and contributions from our amazing community</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Installation Section -->
+                <section id="installation" class="mb-16">
+                    <h2 class="text-3xl font-bold text-text-primary mb-6">Installation & Setup</h2>
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-text-secondary mb-6">
+                            Good news! There's literally nothing to install. Saket's Language runs entirely in your browser. 
+                            Just open our <a href="interactive_ide.html" class="text-primary hover:underline">Interactive IDE</a> and start coding!
+                        </p>
+
+                        <div class="bg-success-50 border border-success-100 rounded-lg p-6 mb-6">
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-success mr-3 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-success-600 mb-2">Zero Setup Required!</h4>
+                                    <p class="text-success-600">No downloads, no installations, no configuration files. Just pure coding joy in your browser.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-text-primary mb-4">Browser Requirements</h3>
+                        <ul class="list-disc list-inside text-text-secondary space-y-2 mb-6">
+                            <li>Modern browser (Chrome 80+, Firefox 75+, Safari 13+, Edge 80+)</li>
+                            <li>JavaScript enabled (obviously!)</li>
+                            <li>Internet connection for the IDE</li>
+                            <li>A sense of humor (highly recommended)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- First Program Section -->
+                <section id="first-program" class="mb-16">
+                    <h2 class="text-3xl font-bold text-text-primary mb-6">Your First Program</h2>
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-text-secondary mb-6">
+                            Let's start with the classic "Hello World" program, but with a Saket's Language twist. 
+                            Because why be boring when you can be awesome?
+                        </p>
+
+                        <div class="bg-gray-900 rounded-xl p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-white font-semibold">hello_world.saket</h4>
+                                <button class="btn-primary text-sm py-2 px-4" onclick="tryInIDE('hello-world')">
+                                    Try in IDE
+                                </button>
+                            </div>
+                            <pre class="text-green-400 font-mono text-sm leading-relaxed"><code>// Your first Saket's Language program
+bhai naam = "World"
+bol "Hello, " + naam + "! 👋"
+bol "Welcome to Saket's Language!"
+
+// Let's do some quick math too
+calculate karo 2 + 2
+bol "By the way, 2 + 2 = " + result</code></pre>
+                        </div>
+
+                        <div class="bg-primary-50 border border-primary-100 rounded-lg p-6 mb-6">
+                            <h4 class="font-semibold text-primary-600 mb-3">Expected Output:</h4>
+                            <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm">
+                                Hello, World! 👋<br />
+                                Welcome to Saket's Language!<br />
+                                By the way, 2 + 2 = 4
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-text-primary mb-4">Breaking It Down</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-primary pl-4">
+                                <code class="text-primary font-mono">bhai naam = "World"</code>
+                                <p class="text-text-secondary mt-1">Creates a variable named 'naam' with the value "World". Yes, we use 'bhai' instead of 'var' or 'let' because friendship matters!</p>
+                            </div>
+                            <div class="border-l-4 border-secondary pl-4">
+                                <code class="text-secondary font-mono">bol "Hello, " + naam + "! 👋"</code>
+                                <p class="text-text-secondary mt-1">Prints text to the console. 'bol' means "speak" in Hindi - much more friendly than 'print' or 'console.log'!</p>
+                            </div>
+                            <div class="border-l-4 border-accent pl-4">
+                                <code class="text-accent font-mono">calculate karo 2 + 2</code>
+                                <p class="text-text-secondary mt-1">Performs mathematical calculations. The result is automatically stored in the 'result' variable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Variables Section -->
+                <section id="variables" class="mb-16">
+                    <h2 class="text-3xl font-bold text-text-primary mb-6">Variables & Data Types</h2>
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-text-secondary mb-6">
+                            In Saket's Language, declaring variables is as easy as introducing a friend. 
+                            We use 'bhai' (brother) because every variable is part of our coding family!
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-text-primary mb-4">Variable Declaration</h3>
+                        <div class="bg-gray-900 rounded-xl p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-white font-semibold">Variables Example</h4>
+                                <button class="btn-primary text-sm py-2 px-4" onclick="tryInIDE('variables')">
+                                    Try in IDE
+                                </button>
+                            </div>
+                            <pre class="text-green-400 font-mono text-sm leading-relaxed"><code>// Different types of variables
+bhai name = "Saket"           // String
+bhai age = 25                 // Number
+bhai isAwesome = true         // Boolean
+bhai hobbies = ["coding", "gaming", "music"]  // Array
+bhai person = {               // Object
+    naam: "Saket",
+    age: 25,
+    city: "Mumbai"
+}
+
+// Display all variables
+bol "Name: " + name
+bol "Age: " + age
+bol "Is Awesome: " + isAwesome
+bol "Hobbies: " + hobbies[0]
+bol "Person: " + person.naam</code></pre>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div class="card">
+                                <h4 class="font-semibold text-text-primary mb-3">Supported Data Types</h4>
+                                <ul class="space-y-2 text-text-secondary">
+                                    <li><code class="text-primary">String</code> - Text values</li>
+                                    <li><code class="text-primary">Number</code> - Integers and decimals</li>
+                                    <li><code class="text-primary">Boolean</code> - true/false values</li>
+                                    <li><code class="text-primary">Array</code> - Lists of values</li>
+                                    <li><code class="text-primary">Object</code> - Key-value pairs</li>
+                                </ul>
+                            </div>
+                            <div class="card">
+                                <h4 class="font-semibold text-text-primary mb-3">Variable Rules</h4>
+                                <ul class="space-y-2 text-text-secondary">
+                                    <li>Always start with <code class="text-primary">bhai</code></li>
+                                    <li>Variable names can contain letters, numbers, _</li>
+                                    <li>Cannot start with numbers</li>
+                                    <li>Case sensitive (naam ≠ Naam)</li>
+                                    <li>No spaces in variable names</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Conditionals Section -->
+                <section id="conditionals" class="mb-16">
+                    <h2 class="text-3xl font-bold text-text-primary mb-6">Conditionals</h2>
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-text-secondary mb-6">
+                            Making decisions in code should feel natural. That's why we use 'agar' (if) and 'warna' (else) - 
+                            words you'd actually use in conversation!
+                        </p>
+
+                        <div class="bg-gray-900 rounded-xl p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-white font-semibold">Conditional Logic Example</h4>
+                                <button class="btn-primary text-sm py-2 px-4" onclick="tryInIDE('conditionals')">
+                                    Try in IDE
+                                </button>
+                            </div>
+                            <pre class="text-green-400 font-mono text-sm leading-relaxed"><code>// Simple if-else
+bhai age = 20
+bhai name = "Rahul"
+
+agar (age >= 18) {
+    bol name + " is an adult! 🎉"
+    agar (age >= 21) {
+        bol "Can drink in the US too!"
+    } warna {
+        bol "But not old enough for US bars 🍺"
+    }
+} warna {
+    bol name + " is still a kid!"
+    calculate karo 18 - age
+    bol "Wait " + result + " more years"
+}
+
+// Multiple conditions
+bhai score = 85
+
+agar (score >= 90) {
+    bol "Excellent! A+ grade 🌟"
+} warna agar (score >= 80) {
+    bol "Great job! A grade 👏"
+} warna agar (score >= 70) {
+    bol "Good work! B grade 👍"
+} warna {
+    bol "Keep trying! You'll get there 💪"
+}</code></pre>
+                        </div>
+
+                        <div class="bg-accent-50 border border-accent-100 rounded-lg p-6 mb-6">
+                            <h4 class="font-semibold text-accent-600 mb-3">Comparison Operators</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <ul class="space-y-2 text-accent-600 font-mono text-sm">
+                                        <li><code>==</code> Equal to</li>
+                                        <li><code>!=</code> Not equal to</li>
+                                        <li><code>&gt;</code> Greater than</li>
+                                        <li><code>&lt;</code> Less than</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <ul class="space-y-2 text-accent-600 font-mono text-sm">
+                                        <li><code>&gt;=</code> Greater than or equal</li>
+                                        <li><code>&lt;=</code> Less than or equal</li>
+                                        <li><code>&&</code> AND</li>
+                                        <li><code>||</code> OR</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Mathematical Operations Section -->
+                <section id="basic-math" class="mb-16">
+                    <h2 class="text-3xl font-bold text-text-primary mb-6">Mathematical Operations</h2>
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-text-secondary mb-6">
+                            This is where Saket's Language really shines! Our built-in mathematical computation engine 
+                            can handle everything from basic arithmetic to complex statistical analysis.
+                        </p>
+
+                        <div class="bg-gray-900 rounded-xl p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-white font-semibold">Mathematical Operations</h4>
+                                <button class="btn-primary text-sm py-2 px-4" onclick="tryInIDE('math-operations')">
+                                    Try in IDE
+                                </button>
+                            </div>
+                            <pre class="text-green-400 font-mono text-sm leading-relaxed"><code>// Basic arithmetic
+calculate karo 15 + 25
+bol "Addition: " + result
+
+calculate karo 50 - 20
+bol "Subtraction: " + result
+
+calculate karo 6 * 7
+bol "Multiplication: " + result
+
+calculate karo 100 / 4
+bol "Division: " + result
+
+// Advanced functions
+calculate karo sqrt(144)
+bol "Square root of 144: " + result
+
+calculate karo pow(2, 8)
+bol "2 to the power of 8: " + result
+
+calculate karo sin(90)
+bol "Sin of 90 degrees: " + result
+
+calculate karo log(100)
+bol "Log of 100: " + result
+
+// Working with arrays
+bhai numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+calculate karo sum(numbers)
+bol "Sum of array: " + result
+
+calculate karo average(numbers)
+bol "Average: " + result
+
+calculate karo max(numbers)
+bol "Maximum: " + result</code></pre>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6 mb-6">
+                            <div class="card">
+                                <h4 class="font-semibold text-text-primary mb-3">Basic Operations</h4>
+                                <ul class="space-y-1 text-text-secondary text-sm font-mono">
+                                    <li>+ (addition)</li>
+                                    <li>- (subtraction)</li>
+                                    <li>* (multiplication)</li>
+                                    <li>/ (division)</li>
+                                    <li>% (modulus)</li>
+                                </ul>
+                            </div>
+                            <div class="card">
+                                <h4 class="font-semibold text-text-primary mb-3">Advanced Functions</h4>
+                                <ul class="space-y-1 text-text-secondary text-sm font-mono">
+                                    <li>sqrt(x)</li>
+                                    <li>pow(x, y)</li>
+                                    <li>sin(x), cos(x), tan(x)</li>
+                                    <li>log(x), log10(x)</li>
+                                    <li>abs(x), ceil(x), floor(x)</li>
+                                </ul>
+                            </div>
+                            <div class="card">
+                                <h4 class="font-semibold text-text-primary mb-3">Array Functions</h4>
+                                <ul class="space-y-1 text-text-secondary text-sm font-mono">
+                                    <li>sum(array)</li>
+                                    <li>average(array)</li>
+                                    <li>max(array), min(array)</li>
+                                    <li>median(array)</li>
+                                    <li>sort(array)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Community Examples Section -->
+                <section id="examples" class="mb-16">
+                    <h2 class="text-3xl font-bold text-text-primary mb-6">Community Examples</h2>
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-text-secondary mb-6">
+                            Check out these amazing examples created by our community! Each one showcases different 
+                            aspects of Saket's Language and demonstrates real-world applications.
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <!-- Example 1 -->
+                            <div class="card group">
+                                <div class="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg mb-4 overflow-hidden">
+                                    <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Calculator Project" class="w-full h-full object-cover group-hover:scale-105 transition-slow" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                </div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-2">Scientific Calculator</h3>
+                                <p class="text-text-secondary text-sm mb-4">A full-featured calculator with trigonometric functions, logarithms, and statistical operations.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="https://images.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg" alt="User Avatar" class="w-6 h-6 rounded-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                        <span class="text-sm text-text-secondary">by Priya</span>
+                                    </div>
+                                    <button class="btn-primary text-sm py-1 px-3" onclick="tryInIDE('calculator')">
+                                        Try It
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Example 2 -->
+                            <div class="card group">
+                                <div class="aspect-video bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-lg mb-4 overflow-hidden">
+                                    <img src="https://images.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png" alt="Data Analysis" class="w-full h-full object-cover group-hover:scale-105 transition-slow" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                </div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-2">Data Analysis Tool</h3>
+                                <p class="text-text-secondary text-sm mb-4">Analyze datasets with statistical functions, generate insights, and create summaries.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="User Avatar" class="w-6 h-6 rounded-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                        <span class="text-sm text-text-secondary">by Arjun</span>
+                                    </div>
+                                    <button class="btn-primary text-sm py-1 px-3" onclick="tryInIDE('data-analysis')">
+                                        Try It
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Example 3 -->
+                            <div class="card group">
+                                <div class="aspect-video bg-gradient-to-br from-accent-100 to-accent-200 rounded-lg mb-4 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Game Project" class="w-full h-full object-cover group-hover:scale-105 transition-slow" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                </div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-2">Number Guessing Game</h3>
+                                <p class="text-text-secondary text-sm mb-4">Interactive game with hints, scoring system, and difficulty levels.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="User Avatar" class="w-6 h-6 rounded-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                        <span class="text-sm text-text-secondary">by Rahul</span>
+                                    </div>
+                                    <button class="btn-primary text-sm py-1 px-3" onclick="tryInIDE('guessing-game')">
+                                        Try It
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Example 4 -->
+                            <div class="card group">
+                                <div class="aspect-video bg-gradient-to-br from-success-100 to-success-200 rounded-lg mb-4 overflow-hidden">
+                                    <img src="https://images.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg" alt="Physics Simulator" class="w-full h-full object-cover group-hover:scale-105 transition-slow" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                </div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-2">Physics Simulator</h3>
+                                <p class="text-text-secondary text-sm mb-4">Simulate projectile motion, calculate trajectories, and visualize physics concepts.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="https://images.unsplash.com/photo-1494790108755-2616c0763c5c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="User Avatar" class="w-6 h-6 rounded-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                        <span class="text-sm text-text-secondary">by Sneha</span>
+                                    </div>
+                                    <button class="btn-primary text-sm py-1 px-3" onclick="tryInIDE('physics-sim')">
+                                        Try It
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="javascript:void(0)" class="btn-secondary">
+                                View All Community Examples
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Best Practices Section -->
+                <section id="best-practices" class="mb-16">
+                    <h2 class="text-3xl font-bold text-text-primary mb-6">Best Practices</h2>
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-text-secondary mb-6">
+                            Follow these guidelines to write clean, efficient, and maintainable Saket's Language code. 
+                            Remember, good code is like a good joke - if you have to explain it, it's probably not that good!
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="card">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-8 h-8 bg-success-100 rounded-lg flex items-center justify-center mr-3">
+                                        <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-text-primary">Do's</h3>
+                                </div>
+                                <ul class="space-y-2 text-text-secondary">
+                                    <li>✅ Use descriptive variable names</li>
+                                    <li>✅ Add comments to explain complex logic</li>
+                                    <li>✅ Keep functions small and focused</li>
+                                    <li>✅ Use consistent indentation</li>
+                                    <li>✅ Test your mathematical calculations</li>
+                                    <li>✅ Handle edge cases gracefully</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-8 h-8 bg-error-100 rounded-lg flex items-center justify-center mr-3">
+                                        <svg class="w-5 h-5 text-error" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-text-primary">Don'ts</h3>
+                                </div>
+                                <ul class="space-y-2 text-text-secondary">
+                                    <li>❌ Don't use single-letter variable names</li>
+                                    <li>❌ Don't write overly complex expressions</li>
+                                    <li>❌ Don't ignore error handling</li>
+                                    <li>❌ Don't hardcode values everywhere</li>
+                                    <li>❌ Don't forget to test edge cases</li>
+                                    <li>❌ Don't write code without comments</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-900 rounded-xl p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-white font-semibold">Clean Code Example</h4>
+                                <button class="btn-primary text-sm py-2 px-4" onclick="tryInIDE('clean-code')">
+                                    Try in IDE
+                                </button>
+                            </div>
+                            <pre class="text-green-400 font-mono text-sm leading-relaxed"><code>// Good: Descriptive names and clear structure
+bhai studentGrades = [85, 92, 78, 96, 88, 91, 83]
+bhai passingGrade = 75
+
+// Calculate class statistics
+calculate karo average(studentGrades)
+bhai classAverage = result
+
+calculate karo max(studentGrades)
+bhai highestGrade = result
+
+calculate karo min(studentGrades)
+bhai lowestGrade = result
+
+// Display results with clear formatting
+bol "=== Class Performance Report ==="
+bol "Total Students: " + studentGrades.length
+bol "Class Average: " + classAverage.toFixed(2)
+bol "Highest Grade: " + highestGrade
+bol "Lowest Grade: " + lowestGrade
+
+// Check passing rate
+bhai passingStudents = 0
+studentGrades.forEach(grade => {
+    agar (grade >= passingGrade) {
+        passingStudents = passingStudents + 1
+    }
+})
+
+calculate karo (passingStudents / studentGrades.length) * 100
+bhai passingRate = result
+
+bol "Passing Rate: " + passingRate.toFixed(1) + "%"</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Reference -->
+                <section id="quick-reference" class="mb-16">
+                    <h2 class="text-3xl font-bold text-text-primary mb-6">Quick Reference</h2>
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-text-secondary mb-6">
+                            Keep this handy reference nearby while coding. It's like a cheat sheet, but we prefer to call it a "success sheet"!
+                        </p>
+
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="card">
+                                <h4 class="font-semibold text-text-primary mb-3">Basic Syntax</h4>
+                                <div class="space-y-2 font-mono text-sm">
+                                    <div><code class="text-primary">bhai x = 5</code> - Variable</div>
+                                    <div><code class="text-primary">bol "text"</code> - Print</div>
+                                    <div><code class="text-primary">agar (condition)</code> - If</div>
+                                    <div><code class="text-primary">warna</code> - Else</div>
+                                    <div><code class="text-primary">calculate karo</code> - Math</div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h4 class="font-semibold text-text-primary mb-3">Math Functions</h4>
+                                <div class="space-y-2 font-mono text-sm">
+                                    <div><code class="text-secondary">sqrt(x)</code> - Square root</div>
+                                    <div><code class="text-secondary">pow(x, y)</code> - Power</div>
+                                    <div><code class="text-secondary">sin(x)</code> - Sine</div>
+                                    <div><code class="text-secondary">log(x)</code> - Logarithm</div>
+                                    <div><code class="text-secondary">abs(x)</code> - Absolute</div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h4 class="font-semibold text-text-primary mb-3">Array Functions</h4>
+                                <div class="space-y-2 font-mono text-sm">
+                                    <div><code class="text-accent">sum(arr)</code> - Sum all</div>
+                                    <div><code class="text-accent">average(arr)</code> - Average</div>
+                                    <div><code class="text-accent">max(arr)</code> - Maximum</div>
+                                    <div><code class="text-accent">min(arr)</code> - Minimum</div>
+                                    <div><code class="text-accent">sort(arr)</code> - Sort</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M12 14h8v2h-8v-2zm0 4h6v2h-6v-2z" fill="white"/>
+                        </svg>
+                        <div class="ml-3">
+                            <h3 class="text-xl font-bold">Saket's Language</h3>
+                            <p class="text-sm text-gray-400">Real code, unreal syntax</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Making programming accessible, fun, and powerful through conversational syntax and real computational capabilities.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="javascript:void(0)" class="text-gray-400 hover:text-primary transition-fast">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-gray-400 hover:text-primary transition-fast">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-gray-400 hover:text-primary transition-fast">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="interactive_ide.html" class="text-gray-400 hover:text-white transition-fast">IDE</a></li>
+                        <li><a href="documentation.html" class="text-gray-400 hover:text-white transition-fast">Documentation</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-fast">Tutorials</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-fast">Examples</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-fast">Community</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-fast">API Reference</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-fast">GitHub</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-fast">Blog</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-fast">Support</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-fast">Changelog</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 Saket's Language. All Rights Reserved. Made with ❤️ for the developer community.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                navLinks.forEach(link => {
+                    const text = link.textContent.toLowerCase();
+                    const listItem = link.parentElement;
+                    if (text.includes(searchTerm)) {
+                        listItem.style.display = 'block';
+                    } else {
+                        listItem.style.display = searchTerm === '' ? 'block' : 'none';
+                    }
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        // Remove active class from all links
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        // Add active class to clicked link
+                        this.classList.add('active');
+                        
+                        // Smooth scroll to target
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Update active navigation based on scroll position
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section[id]');
+                const scrollPos = window.scrollY + 100;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const sidebar = document.querySelector('aside');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('hidden');
+                sidebar.classList.toggle('lg:block');
+            });
+        });
+
+        // Try in IDE functionality
+        function tryInIDE(exampleId) {
+            // This would normally open the IDE with the specific example
+            // For now, we'll just redirect to the IDE page
+            window.open('interactive_ide.html', '_blank');
+        }
+
+        // Add custom styles for navigation
+        const style = document.createElement('style');
+        style.textContent = `
+            .nav-link {
+                display: block;
+                padding: 0.5rem 0.75rem;
+                color: #6B7280;
+                text-decoration: none;
+                border-radius: 0.375rem;
+                transition: all 200ms ease-out;
+                font-size: 0.875rem;
+            }
+            
+            .nav-link:hover {
+                color: #6366F1;
+                background-color: #EEF2FF;
+            }
+            
+            .nav-link.active {
+                color: #6366F1;
+                background-color: #EEF2FF;
+                font-weight: 500;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

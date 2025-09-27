@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive IDE - Saket's Language</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fsaketsla7364back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background font-inter overflow-hidden">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-subtle sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M12 14h8v2h-8v-2zm0 4h6v2h-6v-2z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-bold text-text-primary">Saket's Language</h1>
+                        <p class="text-xs text-text-secondary">Real code, unreal syntax</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-fast">Home</a>
+                        <a href="interactive_ide.html" class="text-primary font-medium px-3 py-2 rounded-md text-sm bg-primary-50">IDE</a>
+                        <a href="documentation.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-fast">Docs</a>
+                        <a href="javascript:void(0)" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-fast">Community</a>
+                        <a href="javascript:void(0)" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-fast">Tutorials</a>
+                    </div>
+                </div>
+
+                <!-- IDE Actions -->
+                <div class="flex items-center space-x-3">
+                    <button id="runBtn" class="bg-success text-white px-4 py-2 rounded-lg font-medium hover:bg-success-600 transition-fast flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h1m4 0h1m6-10V7a3 3 0 00-3-3H6a3 3 0 00-3 3v10a3 3 0 003 3h12a3 3 0 003-3v-1"/>
+                        </svg>
+                        Run
+                    </button>
+                    <button id="shareBtn" class="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-600 transition-fast flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                        </svg>
+                        Share
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="text-text-secondary hover:text-primary p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- IDE Main Container -->
+    <div class="flex h-screen" style="height: calc(100vh - 4rem);">
+        <!-- Sidebar -->
+        <div class="w-64 bg-surface border-r border-border flex flex-col">
+            <!-- File Explorer Header -->
+            <div class="p-4 border-b border-border">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-semibold text-text-primary">Files</h3>
+                    <button id="newFileBtn" class="text-text-secondary hover:text-primary transition-fast">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Quick Templates -->
+                <div class="space-y-2">
+                    <button class="template-btn w-full text-left px-3 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary rounded-lg transition-fast" data-template="hello">
+                        📝 Hello World
+                    </button>
+                    <button class="template-btn w-full text-left px-3 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary rounded-lg transition-fast" data-template="math">
+                        🧮 Math Example
+                    </button>
+                    <button class="template-btn w-full text-left px-3 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary rounded-lg transition-fast" data-template="conditions">
+                        🔀 Conditions
+                    </button>
+                </div>
+            </div>
+
+            <!-- File List -->
+            <div class="flex-1 p-4">
+                <div class="space-y-1" id="fileList">
+                    <div class="file-item flex items-center justify-between p-2 bg-primary-50 text-primary rounded-lg cursor-pointer" data-file="main.sk">
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <span class="text-sm font-medium">main.sk</span>
+                        </div>
+                        <button class="text-text-secondary hover:text-error transition-fast">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help Panel -->
+            <div class="p-4 border-t border-border">
+                <button id="helpToggle" class="w-full flex items-center justify-between p-3 bg-accent-50 text-accent rounded-lg hover:bg-accent-100 transition-fast">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="font-medium">Quick Help</span>
+                    </div>
+                    <svg class="w-4 h-4 transform transition-transform" id="helpArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                
+                <div id="helpContent" class="mt-3 space-y-2 hidden">
+                    <div class="text-xs text-text-secondary">
+                        <div class="font-medium mb-1">Quick Syntax:</div>
+                        <div class="font-mono bg-background p-2 rounded text-xs">
+                            bhai name = "value"<br />
+                            agar (condition) { }<br />
+                            bol "message"<br />
+                            calculate karo 2 + 2
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Editor Area -->
+        <div class="flex-1 flex flex-col">
+            <!-- Editor Tabs -->
+            <div class="bg-surface border-b border-border">
+                <div class="flex items-center px-4 py-2">
+                    <div class="tab active flex items-center px-4 py-2 bg-primary-50 text-primary rounded-t-lg border-b-2 border-primary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span class="font-medium">main.sk</span>
+                        <button class="ml-2 text-text-secondary hover:text-error transition-fast">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Split Panel Container -->
+            <div class="flex-1 flex">
+                <!-- Code Editor Panel -->
+                <div class="flex-1 flex flex-col bg-gray-900 relative">
+                    <!-- Editor Toolbar -->
+                    <div class="bg-gray-800 px-4 py-2 flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-error rounded-full"></div>
+                                <div class="w-3 h-3 bg-warning rounded-full"></div>
+                                <div class="w-3 h-3 bg-success rounded-full"></div>
+                            </div>
+                            <span class="text-gray-400 text-sm font-mono">Saket's Language Editor</span>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <button id="formatBtn" class="text-gray-400 hover:text-white transition-fast p-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/>
+                                </svg>
+                            </button>
+                            <button id="settingsBtn" class="text-gray-400 hover:text-white transition-fast p-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Line Numbers and Editor -->
+                    <div class="flex-1 flex">
+                        <!-- Line Numbers -->
+                        <div class="bg-gray-800 text-gray-500 text-right py-4 px-3 font-mono text-sm select-none" id="lineNumbers">
+                            <div>1</div>
+                            <div>2</div>
+                            <div>3</div>
+                            <div>4</div>
+                            <div>5</div>
+                            <div>6</div>
+                            <div>7</div>
+                            <div>8</div>
+                            <div>9</div>
+                            <div>10</div>
+                        </div>
+
+                        <!-- Code Editor -->
+                        <div class="flex-1 relative">
+                            <textarea id="codeEditor" class="w-full h-full bg-gray-900 text-green-400 font-mono text-sm p-4 resize-none outline-none border-none" spellcheck="false" placeholder="// Welcome to Saket's Language IDE!
+// Start typing your code here...
+
+bhai message = &quot;Hello, World!&quot;
+bol message
+
+// Try some math
+calculate karo 2 + 2 * 3
+bol &quot;Result: &quot; + result">// Welcome to Saket's Language IDE!
+// Let's create something amazing together! 🚀
+
+bhai name = "Developer"
+bhai age = 25
+
+agar (name.length > 0) {
+    bol "Hello, " + name + "! 👋"
+    agar (age >= 18) {
+        bol "You're an adult! Time to code seriously... or not! 😄"
+        calculate karo age * 365
+        bol "You've lived approximately " + result + " days!"
+    } warna {
+        bol "Young coder in the making! 🌟"
+    }
+} warna {
+    bol "Hey anonymous coder! What's your name?"
+}
+
+// Let's do some fun math
+bhai x = 10
+bhai y = 5
+
+calculate karo sqrt(x * x + y * y)
+bol "Hypotenuse: " + result
+
+// More calculations
+calculate karo sin(45) + cos(45)
+bol "Trigonometry result: " + result</textarea>
+
+                            <!-- Code Completion Popup -->
+                            <div id="completionPopup" class="absolute bg-gray-800 border border-gray-600 rounded-lg shadow-strong z-10 hidden">
+                                <div class="p-2 space-y-1">
+                                    <div class="completion-item px-3 py-2 text-sm text-gray-300 hover:bg-primary-600 hover:text-white rounded cursor-pointer">
+                                        <span class="font-mono">bhai</span>
+                                        <span class="text-gray-500 ml-2">variable declaration</span>
+                                    </div>
+                                    <div class="completion-item px-3 py-2 text-sm text-gray-300 hover:bg-primary-600 hover:text-white rounded cursor-pointer">
+                                        <span class="font-mono">agar</span>
+                                        <span class="text-gray-500 ml-2">if condition</span>
+                                    </div>
+                                    <div class="completion-item px-3 py-2 text-sm text-gray-300 hover:bg-primary-600 hover:text-white rounded cursor-pointer">
+                                        <span class="font-mono">bol</span>
+                                        <span class="text-gray-500 ml-2">print statement</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Status Bar -->
+                    <div class="bg-gray-800 px-4 py-2 flex items-center justify-between text-sm text-gray-400">
+                        <div class="flex items-center space-x-4">
+                            <span>Line 1, Column 1</span>
+                            <span>Saket's Language</span>
+                            <div class="flex items-center space-x-1">
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                                <span>Ready</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span>UTF-8</span>
+                            <span>LF</span>
+                            <button class="hover:text-white transition-fast">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resizer -->
+                <div class="w-1 bg-border hover:bg-primary cursor-col-resize transition-fast" id="resizer"></div>
+
+                <!-- Output Panel -->
+                <div class="w-96 flex flex-col bg-surface">
+                    <!-- Output Tabs -->
+                    <div class="border-b border-border">
+                        <div class="flex">
+                            <button class="output-tab active px-4 py-3 text-sm font-medium text-primary border-b-2 border-primary bg-primary-50">
+                                Console
+                            </button>
+                            <button class="output-tab px-4 py-3 text-sm font-medium text-text-secondary hover:text-primary transition-fast">
+                                Problems
+                            </button>
+                            <button class="output-tab px-4 py-3 text-sm font-medium text-text-secondary hover:text-primary transition-fast">
+                                Terminal
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Console Output -->
+                    <div class="flex-1 p-4 font-mono text-sm overflow-y-auto" id="consoleOutput">
+                        <div class="space-y-2">
+                            <div class="text-text-secondary">
+                                <span class="text-accent">[IDE]</span> Welcome to Saket's Language Interactive IDE! 🎉
+                            </div>
+                            <div class="text-text-secondary">
+                                <span class="text-accent">[IDE]</span> Ready to execute your code. Click "Run" to start!
+                            </div>
+                            <div class="border-t border-border my-3"></div>
+                        </div>
+                    </div>
+
+                    <!-- Mathematical Computation Panel -->
+                    <div class="border-t border-border p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-semibold text-text-primary">Math Engine</h4>
+                            <div class="flex items-center space-x-1">
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                                <span class="text-xs text-success">Active</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-background rounded-lg p-3">
+                            <div class="text-xs text-text-secondary mb-2">Last Computation:</div>
+                            <div class="font-mono text-sm text-text-primary" id="lastComputation">
+                                sqrt(10² + 5²) = 11.18
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3 grid grid-cols-2 gap-2">
+                            <button class="math-fn-btn px-3 py-2 text-xs bg-secondary-50 text-secondary rounded hover:bg-secondary-100 transition-fast">
+                                sin()
+                            </button>
+                            <button class="math-fn-btn px-3 py-2 text-xs bg-secondary-50 text-secondary rounded hover:bg-secondary-100 transition-fast">
+                                cos()
+                            </button>
+                            <button class="math-fn-btn px-3 py-2 text-xs bg-secondary-50 text-secondary rounded hover:bg-secondary-100 transition-fast">
+                                sqrt()
+                            </button>
+                            <button class="math-fn-btn px-3 py-2 text-xs bg-secondary-50 text-secondary rounded hover:bg-secondary-100 transition-fast">
+                                pow()
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Collaboration Panel -->
+                    <div class="border-t border-border p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-semibold text-text-primary">Collaboration</h4>
+                            <button id="inviteBtn" class="text-xs bg-primary text-white px-3 py-1 rounded hover:bg-primary-600 transition-fast">
+                                Invite
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="User Avatar" class="w-6 h-6 rounded-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <span class="text-sm text-text-primary">You</span>
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                            </div>
+                            
+                            <div class="text-xs text-text-secondary">
+                                Share this session to collaborate in real-time!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-surface rounded-xl p-6 max-w-md w-full mx-4 shadow-strong">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-text-primary">Share Your Code</h3>
+                <button id="closeShareModal" class="text-text-secondary hover:text-text-primary transition-fast">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-text-primary mb-2">Share Link</label>
+                    <div class="flex">
+                        <input type="text" value="https://saketslang.dev/share/abc123" class="flex-1 input-field rounded-r-none" readonly />
+                        <button class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-primary-600 transition-fast">
+                            Copy
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-2">
+                    <button class="flex-1 bg-secondary text-white py-2 px-4 rounded-lg hover:bg-secondary-600 transition-fast">
+                        Save to Gallery
+                    </button>
+                    <button class="flex-1 bg-accent text-white py-2 px-4 rounded-lg hover:bg-accent-600 transition-fast">
+                        Export Code
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-surface rounded-xl p-6 max-w-lg w-full mx-4 shadow-strong">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold text-text-primary">Editor Settings</h3>
+                <button id="closeSettingsModal" class="text-text-secondary hover:text-text-primary transition-fast">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-text-primary mb-2">Theme</label>
+                    <select class="w-full input-field">
+                        <option>Dark (Default)</option>
+                        <option>Light</option>
+                        <option>High Contrast</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-text-primary mb-2">Font Size</label>
+                    <input type="range" min="12" max="20" value="14" class="w-full" />
+                    <div class="flex justify-between text-xs text-text-secondary mt-1">
+                        <span>12px</span>
+                        <span>20px</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-3">
+                    <label class="flex items-center">
+                        <input type="checkbox" checked class="mr-3" />
+                        <span class="text-sm text-text-primary">Auto-save</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" checked class="mr-3" />
+                        <span class="text-sm text-text-primary">Syntax highlighting</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" class="mr-3" />
+                        <span class="text-sm text-text-primary">Line wrapping</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" checked class="mr-3" />
+                        <span class="text-sm text-text-primary">Auto-completion</span>
+                    </label>
+                </div>
+                
+                <div class="flex space-x-3 pt-4">
+                    <button class="flex-1 btn-primary">Save Settings</button>
+                    <button id="resetSettings" class="flex-1 btn-secondary">Reset to Default</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // IDE Functionality
+        class SaketsLanguageIDE {
+            constructor() {
+                this.initializeElements();
+                this.setupEventListeners();
+                this.setupResizer();
+                this.updateLineNumbers();
+                this.setupTemplates();
+            }
+
+            initializeElements() {
+                this.codeEditor = document.getElementById('codeEditor');
+                this.consoleOutput = document.getElementById('consoleOutput');
+                this.lineNumbers = document.getElementById('lineNumbers');
+                this.runBtn = document.getElementById('runBtn');
+                this.shareBtn = document.getElementById('shareBtn');
+                this.shareModal = document.getElementById('shareModal');
+                this.settingsModal = document.getElementById('settingsModal');
+                this.helpToggle = document.getElementById('helpToggle');
+                this.helpContent = document.getElementById('helpContent');
+                this.helpArrow = document.getElementById('helpArrow');
+                this.lastComputation = document.getElementById('lastComputation');
+            }
+
+            setupEventListeners() {
+                // Run button
+                this.runBtn.addEventListener('click', () => this.runCode());
+                
+                // Share button
+                this.shareBtn.addEventListener('click', () => this.showShareModal());
+                
+                // Modal controls
+                document.getElementById('closeShareModal').addEventListener('click', () => this.hideShareModal());
+                document.getElementById('closeSettingsModal').addEventListener('click', () => this.hideSettingsModal());
+                document.getElementById('settingsBtn').addEventListener('click', () => this.showSettingsModal());
+                
+                // Help toggle
+                this.helpToggle.addEventListener('click', () => this.toggleHelp());
+                
+                // Code editor events
+                this.codeEditor.addEventListener('input', () => this.updateLineNumbers());
+                this.codeEditor.addEventListener('scroll', () => this.syncLineNumbers());
+                
+                // Math function buttons
+                document.querySelectorAll('.math-fn-btn').forEach(btn => {
+                    btn.addEventListener('click', () => this.insertMathFunction(btn.textContent.trim()));
+                });
+
+                // Template buttons
+                document.querySelectorAll('.template-btn').forEach(btn => {
+                    btn.addEventListener('click', () => this.loadTemplate(btn.dataset.template));
+                });
+
+                // Format button
+                document.getElementById('formatBtn').addEventListener('click', () => this.formatCode());
+            }
+
+            setupResizer() {
+                const resizer = document.getElementById('resizer');
+                let isResizing = false;
+
+                resizer.addEventListener('mousedown', (e) => {
+                    isResizing = true;
+                    document.addEventListener('mousemove', handleMouseMove);
+                    document.addEventListener('mouseup', () => {
+                        isResizing = false;
+                        document.removeEventListener('mousemove', handleMouseMove);
+                    });
+                });
+
+                function handleMouseMove(e) {
+                    if (!isResizing) return;
+                    const container = resizer.parentElement;
+                    const rect = container.getBoundingClientRect();
+                    const newWidth = rect.right - e.clientX;
+                    const outputPanel = container.querySelector('.w-96');
+                    outputPanel.style.width = Math.max(200, Math.min(600, newWidth)) + 'px';
+                }
+            }
+
+            updateLineNumbers() {
+                const lines = this.codeEditor.value.split('\n');
+                const lineCount = lines.length;
+                let lineNumbersHTML = '';
+                
+                for (let i = 1; i <= Math.max(lineCount, 10); i++) {
+                    lineNumbersHTML += `<div>${i}</div>`;
+                }
+                
+                this.lineNumbers.innerHTML = lineNumbersHTML;
+            }
+
+            syncLineNumbers() {
+                this.lineNumbers.scrollTop = this.codeEditor.scrollTop;
+            }
+
+            runCode() {
+                const code = this.codeEditor.value;
+                this.runBtn.innerHTML = '<svg class="w-4 h-4 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>Running...';
+                this.runBtn.disabled = true;
+
+                // Simulate code execution
+                setTimeout(() => {
+                    this.executeCode(code);
+                    this.runBtn.innerHTML = '<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h1m4 0h1m6-10V7a3 3 0 00-3-3H6a3 3 0 00-3 3v10a3 3 0 003 3h12a3 3 0 003-3v-1"/></svg>Run';
+                    this.runBtn.disabled = false;
+                }, 1500);
+            }
+
+            executeCode(code) {
+                const outputDiv = document.createElement('div');
+                outputDiv.className = 'space-y-2';
+                
+                // Add execution timestamp
+                const timestamp = new Date().toLocaleTimeString();
+                outputDiv.innerHTML = `
+                    <div class="text-text-secondary">
+                        <span class="text-success">[${timestamp}]</span> Executing code...
+                    </div>
+                `;
+
+                // Simulate parsing and execution
+                const lines = code.split('\n').filter(line => line.trim() && !line.trim().startsWith('//'));
+                
+                lines.forEach((line, index) => {
+                    setTimeout(() => {
+                        if (line.includes('bol ')) {
+                            const message = line.match(/"([^"]*)"/)?.[1] || line.split('bol ')[1];
+                            outputDiv.innerHTML += `
+                                <div class="text-text-primary">
+                                    <span class="text-primary">→</span> ${message}
+                                </div>
+                            `;
+                        } else if (line.includes('calculate karo')) {
+                            const expression = line.split('calculate karo ')[1];
+                            const result = this.evaluateExpression(expression);
+                            outputDiv.innerHTML += `
+                                <div class="text-accent">
+                                    <span class="text-secondary">🧮</span> ${expression} = ${result}
+                                </div>
+                            `;
+                            this.lastComputation.textContent = `${expression} = ${result}`;
+                        } else if (line.includes('bhai ') && line.includes('=')) {
+                            const varName = line.match(/bhai\s+(\w+)/)?.[1];
+                            const value = line.match(/"([^"]*)"|(\d+)/)?.[1] || line.match(/(\d+)/)?.[1];
+                            outputDiv.innerHTML += `
+                                <div class="text-text-secondary">
+                                    <span class="text-accent">📝</span> Variable '${varName}' = ${value}
+                                </div>
+                            `;
+                        }
+                    }, index * 200);
+                });
+
+                // Add completion message
+                setTimeout(() => {
+                    outputDiv.innerHTML += `
+                        <div class="text-success border-t border-border pt-2 mt-2">
+                            <span class="text-success">✓</span> Code executed successfully! 🎉
+                        </div>
+                    `;
+                }, lines.length * 200 + 500);
+
+                this.consoleOutput.appendChild(outputDiv);
+                this.consoleOutput.scrollTop = this.consoleOutput.scrollHeight;
+            }
+
+            evaluateExpression(expr) {
+                // Simple math evaluation for demo
+                try {
+                    if (expr.includes('sqrt(')) {
+                        const num = parseFloat(expr.match(/sqrt\(([^)]+)\)/)[1]);
+                        return Math.sqrt(num).toFixed(2);
+                    } else if (expr.includes('sin(')) {
+                        const num = parseFloat(expr.match(/sin\(([^)]+)\)/)[1]);
+                        return Math.sin(num * Math.PI / 180).toFixed(4);
+                    } else if (expr.includes('cos(')) {
+                        const num = parseFloat(expr.match(/cos\(([^)]+)\)/)[1]);
+                        return Math.cos(num * Math.PI / 180).toFixed(4);
+                    } else {
+                        // Basic arithmetic
+                        return eval(expr.replace(/[^0-9+\-*/.() ]/g, ''));
+                    }
+                } catch (e) {
+                    return 'Error';
+                }
+            }
+
+            loadTemplate(templateName) {
+                const templates = {
+                    hello: `// Hello World Example
+bhai message = "Hello, World!"
+bol message
+
+bhai name = "Developer"
+bol "Welcome, " + name + "! 👋"`,
+                    
+                    math: `// Mathematical Computations
+bhai x = 10
+bhai y = 5
+
+calculate karo x + y
+bol "Sum: " + result
+
+calculate karo sqrt(x * x + y * y)
+bol "Hypotenuse: " + result
+
+calculate karo sin(45) + cos(45)
+bol "Trigonometry: " + result`,
+                    
+                    conditions: `// Conditional Logic
+bhai age = 25
+bhai name = "Coder"
+
+agar (age >= 18) {
+    bol name + " is an adult! 🎉"
+    agar (age >= 21) {
+        bol "Can vote and drive!"
+    }
+} warna {
+    bol "Still young, keep learning!"
+}
+
+// More conditions
+bhai score = 85
+agar (score >= 90) {
+    bol "Excellent! A+ grade"
+} warna agar (score >= 80) {
+    bol "Great job! A grade"
+} warna {
+    bol "Keep practicing!"
+}`
+                };
+
+                if (templates[templateName]) {
+                    this.codeEditor.value = templates[templateName];
+                    this.updateLineNumbers();
+                }
+            }
+
+            formatCode() {
+                // Simple code formatting
+                let code = this.codeEditor.value;
+                const lines = code.split('\n');
+                let formatted = '';
+                let indentLevel = 0;
+
+                lines.forEach(line => {
+                    const trimmed = line.trim();
+                    if (trimmed.includes('}')) indentLevel--;
+                    formatted += '    '.repeat(Math.max(0, indentLevel)) + trimmed + '\n';
+                    if (trimmed.includes('{')) indentLevel++;
+                });
+
+                this.codeEditor.value = formatted;
+                this.updateLineNumbers();
+            }
+
+            insertMathFunction(func) {
+                const cursor = this.codeEditor.selectionStart;
+                const text = this.codeEditor.value;
+                const before = text.substring(0, cursor);
+                const after = text.substring(cursor);
+                
+                this.codeEditor.value = before + func + after;
+                this.codeEditor.focus();
+                this.codeEditor.setSelectionRange(cursor + func.length - 1, cursor + func.length - 1);
+            }
+
+            toggleHelp() {
+                const isHidden = this.helpContent.classList.contains('hidden');
+                this.helpContent.classList.toggle('hidden');
+                this.helpArrow.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+
+            showShareModal() {
+                this.shareModal.classList.remove('hidden');
+            }
+
+            hideShareModal() {
+                this.shareModal.classList.add('hidden');
+            }
+
+            showSettingsModal() {
+                this.settingsModal.classList.remove('hidden');
+            }
+
+            hideSettingsModal() {
+                this.settingsModal.classList.add('hidden');
+            }
+
+            setupTemplates() {
+                // Initialize with a default template
+                this.loadTemplate('hello');
+            }
+        }
+
+        // Initialize IDE when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new SaketsLanguageIDE();
+        });
+
+        // Handle modal clicks outside
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'shareModal') {
+                document.getElementById('shareModal').classList.add('hidden');
+            }
+            if (e.target.id === 'settingsModal') {
+                document.getElementById('settingsModal').classList.add('hidden');
+            }
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
